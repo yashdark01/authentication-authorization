@@ -40,10 +40,23 @@ export const loginUser = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-        res.status(200).json({ user, token });
+        res.cookies("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSize:"strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        })
+        res.status(200).json({ user, token, message:"Login successful" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+//logout user
+
+export const logoutUser = (req, res) => {
+    res.cookie("token", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logged out successfully" });
 };
 
 // Get user by ID

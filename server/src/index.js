@@ -1,11 +1,17 @@
 import express, { urlencoded } from 'express';
 import connectDB from './lib/db.js';
 import dotenv from 'dotenv';
+import cors from 'cors'
 import router from './routes/route.js';
+
 
 dotenv.config();
 
 const app = express();
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}))
 const port = 3002;
 
 app.use(express.json());
