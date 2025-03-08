@@ -1,18 +1,33 @@
-import { useState } from 'react';
-import AuthProvider from './providers/authProvider';
-import { Loader } from 'lucide-react';
+import { useState } from "react";
+// import AuthProvider from './providers/authProvider';
+import { Loader } from "lucide-react";
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import useAuth from "./hooks/useAuth";
+import { SignIn } from "./components/signIn";
 
+
+export const Main = () =>{
+  return(
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<SignIn />} />
+    </Routes>
+  )
+}
 function App() {
-  const [count, setCount] = useState(0);
-  const user = {}; // Replace with actual user object
-  const token = ''; // Replace with actual token
+  const [state, setState] = useState(true);
+  const { isAuthenticated, loading } = useAuth(state);
 
+  if (loading) {
+    <div className="h-screen w-full flex justify-center items-center">
+      <Loader className="size-12 text-emerald-800 font-bold animate-spin" />
+    </div>
+  }
   return (
-    <AuthProvider user={user} token={token}>
-      <div className='h-screen w-full flex justify-center items-center bg-black text-white font-bold text-5xl'>
-        Hello this is yash
-      </div>
-    </AuthProvider>
+    <Router>
+      {isAuthenticated ? <Main /> : <SignIn />}
+    </Router>
   );
 }
 

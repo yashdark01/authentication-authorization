@@ -1,28 +1,41 @@
-import { Loader } from 'lucide-react';
-import {useState, useEffect} from 'react';
+// import { Loader } from 'lucide-react';
+// import { useState, useEffect } from 'react';
+// import useAuth from '../hooks/useAuth';
+// import { SignIn } from '../components/signIn';
+// import { useNavigate } from 'react-router-dom';
 
-const AuthProvider = ({user, token}) => { 
-    const [loading, SetLoading] = useState(true);
+// const AuthProvider = () => { 
+//     const { isAuthenticated, loading } = useAuth();
+//     const navigate = useNavigate();
+//     const [loginStatus, setLoginStatus] = useState(false);
 
-    useEffect(() => {
-        
-    }, [token]);
+//     useEffect(() => {
+//         const timeout = setTimeout(() => {
+//             setLoginStatus(true);
+//         }, 4000);
 
-    if(loading){
-        return(
-            <div className='h-screen w-full flex justify-center items-center  '>
-                <Loader className='size-12 text-emerald-800 font-bold animate-spin '/>
-            </div>
-        )
-    }
+//         return () => clearTimeout(timeout);
+//     }, []);
 
-    return(
-        <div>
-            Auth Provider
-        </div>
+//     useEffect(() => {
+//         if (!loading && isAuthenticated) {
+//             navigate('/');
+//         }
+//     }, [isAuthenticated, loading, navigate]);
 
-    )
+//     if (loading && !loginStatus) {
+//         return (
+//             <div className='h-screen w-full flex justify-center items-center'>
+//                 <Loader className='size-12 text-emerald-800 font-bold animate-spin' />
+//             </div>
+//         );
+//     }
 
-}
+//     return (
+//         <div>
+//             {isAuthenticated ? "Authenticated! Redirecting..." : <SignIn />}
+//         </div>
+//     );
+// };
 
-export default AuthProvider;
+// export default AuthProvider;

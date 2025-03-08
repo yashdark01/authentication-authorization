@@ -1,6 +1,8 @@
-// import express from 'express'
-// import {getToken} from '../controllers/auth.controller'
+import express from 'express';
+import { getToken } from '../controllers/auth.controller.js';
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/get-token', getToken);
+router.get('/token/check', getToken);
+
+export default router;
